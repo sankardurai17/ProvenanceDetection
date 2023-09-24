@@ -1,19 +1,39 @@
 package org.cu.adta.group21.provenancedetection;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/*
+* Main class
+* */
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        //String query=args[0];
+        MyDBConnection connection = new MyDBConnection();
+        //Just created a connection between db and code and queried join operation and printed the results
+        try {
+            Statement st = connection.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from products,routes where product=products.product_id and routes.region_from=5");
+            System.out.println(rs.getMetaData().getColumnName(1));
+            System.out.println(rs.getMetaData().getColumnCount());
+            int columnCount = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                int index = 1;
+                while (index != columnCount + 1) {
+                    System.out.print(rs.getObject(index) + " ");
+                    index++;
+                }
+                System.out.println("");
+            }
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 }
