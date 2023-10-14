@@ -1,6 +1,13 @@
 plugins {
-    id 'java'
+    id 'application'
 }
+
+mainClassName = 'org.cu.adta.group21.provenancedetection.Main'
+
+application {
+        mainClass = 'org.cu.adta.group21.provenancedetection.Main'
+    }
+
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
