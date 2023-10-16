@@ -16,7 +16,10 @@ public class DBUtility {
             Statement st = connection.getConnection().createStatement();
             resultSet = st.executeQuery(query);
             //provenance detection
+            long startTimeForProvenanceComputation=System.currentTimeMillis();
             resultMap=ProvenanceUtil.computeProvenance(resultSet);
+            long endTimeForProvenanceComputation=System.currentTimeMillis();
+            System.out.println("Provenance Computation method time: "+(endTimeForProvenanceComputation-startTimeForProvenanceComputation)+" time in milli seconds");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
