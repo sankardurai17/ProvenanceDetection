@@ -1,39 +1,37 @@
 package org.cu.adta.group21.provenancedetection;
 
-import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
+import org.cu.adta.group21.provenancedetection.dbconnectivity.DBUtility;
+import org.cu.adta.group21.provenancedetection.utility.QueryParser;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Map;
+import java.util.Scanner;
 
 /*
-* Main class
-* */
+ * Main class
+ * */
 public class Main {
     public static void main(String[] args) {
-        //String query=args[0];
-        MyDBConnection connection = new MyDBConnection();
-        //Just created a connection between db and code and queried join operation and printed the results
-        try {
-            Statement st = connection.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("select * from products,routes where product=products.product_id and routes.region_from=5");
-            System.out.println(rs.getMetaData().getColumnName(1));
-            System.out.println(rs.getMetaData().getColumnCount());
-            int columnCount = rs.getMetaData().getColumnCount();
-            while (rs.next()) {
-                int index = 1;
-                while (index != columnCount + 1) {
-                    System.out.print(rs.getObject(index) + " ");
-                    index++;
-                }
-                System.out.println("");
-            }
+        displayWelcomePage();
+        Scanner in = new Scanner(System.in);
+        String qry = in.nextLine();
+        long startTimeForParseQuery=System.currentTimeMillis();
+        String updatedQuery = QueryParser.parseQuery(qry);
+        long endTimeForParseQuery=System.currentTimeMillis();
+        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" milli seconds");
+        System.out.println(updatedQuery);
+        long startTimeForExecuteQuery=System.currentTimeMillis();
+        Map<String, String> resultMap = DBUtility.executeUserQuery(updatedQuery);
+        long endTimeForExecuteQuery=System.currentTimeMillis();
+        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" milli seconds");
+        displayResult(resultMap);
+    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
+    public static void displayWelcomePage() {
+        System.out.println("Hello and Welcome!!" + "Enter the Query that you need to perform: ");
+    }
+
+    public static void displayResult(Map<String, String> resultMap) {
+        resultMap.forEach((key, value) -> System.out.println(key + " " + value));
     }
 }
