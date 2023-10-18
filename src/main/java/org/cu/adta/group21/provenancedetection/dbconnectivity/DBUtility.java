@@ -10,8 +10,8 @@ import java.util.Map;
 public class DBUtility {
     public static Map<String,String> executeUserQuery(String query){
         MyDBConnection connection = new MyDBConnection();
-        ResultSet resultSet=null;
-        Map<String, String> resultMap=new HashMap<String,String>();
+        ResultSet resultSet;
+        Map<String, String> resultMap=new HashMap<>();
         try {
             Statement st = connection.getConnection().createStatement();
             resultSet = st.executeQuery(query);
@@ -19,7 +19,7 @@ public class DBUtility {
             long startTimeForProvenanceComputation=System.currentTimeMillis();
             resultMap=ProvenanceUtil.computeProvenance(resultSet);
             long endTimeForProvenanceComputation=System.currentTimeMillis();
-            System.out.println("Provenance Computation method time: "+(endTimeForProvenanceComputation-startTimeForProvenanceComputation)+" time in milli seconds");
+            System.out.println("Provenance Computation method time taken : "+(endTimeForProvenanceComputation-startTimeForProvenanceComputation)+" in time in milli seconds");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

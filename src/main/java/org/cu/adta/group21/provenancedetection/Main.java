@@ -18,12 +18,12 @@ public class Main {
         long startTimeForParseQuery=System.currentTimeMillis();
         String updatedQuery = QueryParser.parseQuery(qry);
         long endTimeForParseQuery=System.currentTimeMillis();
-        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" milli seconds");
+        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" in milli seconds");
         System.out.println(updatedQuery);
         long startTimeForExecuteQuery=System.currentTimeMillis();
         Map<String, String> resultMap = DBUtility.executeUserQuery(updatedQuery);
         long endTimeForExecuteQuery=System.currentTimeMillis();
-        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" milli seconds");
+        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" in milli seconds");
         displayResult(resultMap);
     }
 
