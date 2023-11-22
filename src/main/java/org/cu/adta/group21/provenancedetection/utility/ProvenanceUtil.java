@@ -13,7 +13,11 @@ public class ProvenanceUtil {
             String ann;
             populateColumnNames(rs, number_of_col, ann_map);
             while (rs.next()) {
+<<<<<<< HEAD
                 /*StringBuilder concatKey = new StringBuilder();
+=======
+                StringBuilder concatKey = new StringBuilder();
+>>>>>>> master
                 for (int i = 3; i < number_of_col + 1; i++) {
                     concatKey.append(rs.getObject(i).toString()).append(" ");
                 }
@@ -23,6 +27,7 @@ public class ProvenanceUtil {
                     ann_map.put(key, ann_map.get(key.trim()) + "+" + ann);
                 } else {
                     ann_map.put(key, ann);
+<<<<<<< HEAD
                 }*/
                 StringBuilder concatKey=new StringBuilder();
                 StringBuilder concatValue=new StringBuilder();
@@ -45,6 +50,9 @@ public class ProvenanceUtil {
                     ann_map.put(key, value);
                 }
 
+=======
+                }
+>>>>>>> master
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,13 +63,18 @@ public class ProvenanceUtil {
     }
 
     private static void populateColumnNames(ResultSet rs, int number_of_col, Map<String, String> ann_map) throws SQLException {
+<<<<<<< HEAD
         /*int k=3;
+=======
+        int k=3;
+>>>>>>> master
         StringBuilder columnName=new StringBuilder();
         while(k<=number_of_col){
             columnName.append(rs.getMetaData().getColumnName(k)).append(" ");
             k++;
         }
         String ann_columnName= rs.getMetaData().getColumnLabel(1)+"."+ rs.getMetaData().getColumnLabel(2);
+<<<<<<< HEAD
         ann_map.put(columnName.toString().trim(),ann_columnName);*/
         StringBuilder columnName=new StringBuilder();
         StringBuilder annColumnNames=new StringBuilder();
@@ -78,3 +91,8 @@ public class ProvenanceUtil {
         ann_map.put(columnName.toString().trim(),annColumnNames.toString().trim());
     }
 }
+=======
+        ann_map.put(columnName.toString().trim(),ann_columnName);
+    }
+}
+>>>>>>> master
