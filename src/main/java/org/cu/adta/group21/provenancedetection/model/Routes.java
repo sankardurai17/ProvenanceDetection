@@ -18,6 +18,7 @@ public class Routes extends Database {
     public int supplier;
     public int product;
     public String ann;
+     public static List<Routes> routes;
 
     public Routes(int route_id, int region_from, int region_to, int supplier, int product, String ann) {
         this.route_id = route_id;
@@ -28,22 +29,24 @@ public class Routes extends Database {
         this.ann = ann;
     }
 
-    public Object getColData(String col_name) {
+    
+    @Override
+    public String getColData(String col_name) {
         if (col_name.compareTo("route_id") == 0) {
-            return this.route_id;
+            return Integer.toString(this.route_id);
         } else if (col_name.compareTo("region_from") == 0) {
-            return this.region_from;
+            return Integer.toString(this.region_from);
         } else if (col_name.compareTo("region_to") == 0) {
-            return this.region_to;
+            return Integer.toString(this.region_to);
         } else if (col_name.compareTo("supplier") == 0) {
-            return this.supplier;
+            return Integer.toString(this.supplier);
         } else if(col_name.compareTo("product") == 0){
-            return this.product;
+            return Integer.toString(this.product);
         } else if(col_name.compareTo("ann") == 0){
             return this.ann;
         }
 
-        return -1;
+        return null;
     }
     
     @Override
@@ -65,7 +68,7 @@ public class Routes extends Database {
                         resultSet.getInt(2), resultSet.getInt(3),
                         resultSet.getInt(4), resultSet.getInt(5),
                         resultSet.getString(6));
-                Database.routes.add(route);
+               routes.add(route);
             }
         } catch (Exception e) {
 

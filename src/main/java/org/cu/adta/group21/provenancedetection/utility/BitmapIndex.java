@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.cu.adta.group21.provenancedetection.model.Database;
-import static org.cu.adta.group21.provenancedetection.model.Database.products;
-import static org.cu.adta.group21.provenancedetection.model.Database.regions;
-import static org.cu.adta.group21.provenancedetection.model.Database.routes;
-import static org.cu.adta.group21.provenancedetection.model.Database.suppliers;
+import org.cu.adta.group21.provenancedetection.model.Products;
+import org.cu.adta.group21.provenancedetection.model.Regions;
+import org.cu.adta.group21.provenancedetection.model.Routes;
+import org.cu.adta.group21.provenancedetection.model.Suppliers;
 
 
 public class BitmapIndex {
@@ -79,22 +78,22 @@ public class BitmapIndex {
         HashMap<String, String> bitmap = new HashMap<String, String>();
         List<String> values = new ArrayList<String>();
         if (table_name.compareTo("products") == 0) {
-            for (int i = 0; i < products.size(); i++) {
-                values.add((String) Database.regions.get(i).getColData(col_name));
+            for (int i = 0; i < Products.products.size(); i++) {
+                values.add(Products.products.get(i).getColData(col_name));
             }
 
         } else if (table_name.compareTo("regions") == 0) {
 
-            for (int i = 0; i < regions.size(); i++) {
-                values.add((String) Database.regions.get(i).getColData(col_name));
+            for (int i = 0; i < Regions.regions.size(); i++) {
+                values.add(Regions.regions.get(i).getColData(col_name));
             }
         } else if (table_name.compareTo("routes") == 0) {
-            for (int i = 0; i < routes.size(); i++) {
-                values.add((String) Database.regions.get(i).getColData(col_name));
+            for (int i = 0; i < Routes.routes.size(); i++) {
+                values.add(Routes.routes.get(i).getColData(col_name));
             }
         } else if (table_name.compareTo("suppliers") == 0) {
-            for (int i = 0; i < suppliers.size(); i++) {
-                values.add((String) Database.regions.get(i).getColData(col_name));
+            for (int i = 0; Suppliers.suppliers.size() >= i; i++) {
+                values.add(Suppliers.suppliers.get(i).getColData(col_name));
             }
         } 
 

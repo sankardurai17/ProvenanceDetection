@@ -2,16 +2,18 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 
 /**
  *
  * @author USER
  */
-public class Suppliers extends Database{
+public class Suppliers implements Database{
     public int supplier_id;
     public String supplier_name;
     public String ann;
+    public static List<Suppliers> suppliers;
     
     public Suppliers(int supplier_id, String supplier_name, String ann){
         this.supplier_id = supplier_id;
@@ -20,16 +22,16 @@ public class Suppliers extends Database{
         
     }
     
-    public Object getColData(String col_name){
+    public String getColData(String col_name){
         if(col_name.compareTo("supplier_id") == 0){
-            return this.supplier_id;
+            return Integer.toString(this.supplier_id);
         }else if(col_name.compareTo("supplier_name") == 0){
             return this.supplier_name;
         }else if(col_name.compareTo("ann") == 0){
             return this.ann;
         }
         
-        return -1;   
+        return null;   
     }
     
     @Override
@@ -49,7 +51,7 @@ public class Suppliers extends Database{
             while (resultSet.next()) {
                 Suppliers supplier = new Suppliers(resultSet.getInt(1), 
                 resultSet.getString(2), resultSet.getString(3));
-                Database.suppliers.add(supplier);
+                suppliers.add(supplier);
             }
         } catch (Exception e) {
 

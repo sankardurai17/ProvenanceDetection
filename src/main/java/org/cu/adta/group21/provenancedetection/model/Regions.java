@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 
 /**
@@ -12,6 +13,7 @@ public class Regions extends Database {
     public int region_id;
     public String region_name;
     public String ann;
+        public static List<Regions> regions;
     
     public Regions(int region_id, String region_name, String ann){
         this.region_id = region_id;
@@ -20,17 +22,17 @@ public class Regions extends Database {
                 
     }
     
-    @Override
-    public Object getColData(String col_name){
+   @Override
+    public String getColData(String col_name){
         if(col_name.compareTo("region_id") == 0){
-            return this.region_id;
+            return Integer.toString(this.region_id);
         }else if(col_name.compareTo("region_name") == 0){
             return this.region_name;
         }else if(col_name.compareTo("ann") == 0){
             return this.ann;
         }
         
-        return -1;   
+        return null;   
     }
     
     @Override
@@ -50,7 +52,7 @@ public class Regions extends Database {
             while (resultSet.next()) {
                 Regions region = new Regions(resultSet.getInt(1), 
                 resultSet.getString(2), resultSet.getString(3));
-                Database.regions.add(region);
+                regions.add(region);
             }
         } catch (Exception e) {
 

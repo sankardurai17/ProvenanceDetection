@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 
 /**
@@ -13,6 +14,8 @@ public class Products extends Database {
     public int product_id;
     public String product_type;
     public String ann;
+    public static List<Products> products;
+
 
     public Products(int product_id, String product_type, String ann) {
         this.product_id = product_id;
@@ -22,16 +25,16 @@ public class Products extends Database {
     }
     
     @Override
-    public Object getColData(String col_name){
+    public String getColData(String col_name){
         if(col_name.compareTo("product_id") == 0){
-            return this.product_id;
+            return Integer.toString(this.product_id);
         }else if(col_name.compareTo("product_type") == 0){
             return this.product_type;
         }else if(col_name.compareTo("ann") == 0){
             return this.ann;
         }
         
-        return -1;   
+      return null; 
     }
     
     @Override
@@ -63,7 +66,7 @@ public class Products extends Database {
             while (resultSet.next()) {
                 Products product = new Products(resultSet.getInt(1), 
                 resultSet.getString(2), resultSet.getString(3));
-                Database.products.add(product);
+                Products.products.add(product);
             }
         } catch (Exception e) {
 
