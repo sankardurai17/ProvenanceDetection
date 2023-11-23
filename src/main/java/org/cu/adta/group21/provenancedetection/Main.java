@@ -4,6 +4,10 @@ import org.cu.adta.group21.provenancedetection.dbconnectivity.DBUtility;
 import org.cu.adta.group21.provenancedetection.utility.QueryParser;
 import java.util.Map;
 import java.util.Scanner;
+import org.cu.adta.group21.provenancedetection.model.Products;
+import org.cu.adta.group21.provenancedetection.model.Regions;
+import org.cu.adta.group21.provenancedetection.model.Routes;
+import org.cu.adta.group21.provenancedetection.model.Suppliers;
 
 /*
  * Main class
@@ -13,6 +17,13 @@ public class Main {
 
     public static void main(String[] args) {
         displayWelcomePage();
+        loadRelations();
+        
+//        Products.displayRelation();
+//        Routes.displayRelation();
+//        Regions.displayRelation();
+//        Suppliers.displayRelation();
+        
 //        Scanner in = new Scanner(System.in);
 //        String qry = in.nextLine();
 //        long startTimeForParseQuery=System.currentTimeMillis();
@@ -35,7 +46,12 @@ public class Main {
         resultMap.forEach((key, value) -> System.out.println(key + " " + value));
     }
     
-    public static void loadRelations(){
+    private static void loadRelations(){
+        Products.loadData();
+        Regions.loadData();
+        Routes.loadData();
+        Suppliers.loadData();
+        
         
     }
 }

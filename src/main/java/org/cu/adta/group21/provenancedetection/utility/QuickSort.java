@@ -1,4 +1,5 @@
 package org.cu.adta.group21.provenancedetection.utility;
+
 import java.util.Collections;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.model.Products;
@@ -11,8 +12,8 @@ public class QuickSort {
     public static int partition(List<?> arr, String col_name, int start, int end) {
         String pivot = "";
         if (arr.get(end) instanceof Products) {
-            pivot = (String) ((Products) arr.get(end)).getColData(col_name);
-            
+            pivot = ((Products) arr.get(end)).getColData(col_name);
+
             int i = (start - 1);
             for (int j = start; j <= end - 1; j++) {
                 if ((Products.products.get(j).getColData(col_name)).compareTo(pivot) < 0) {
@@ -20,13 +21,13 @@ public class QuickSort {
                     Collections.swap(Products.products, i, j);
                 }
             }
-            Collections.swap(Products.products, i+1, end);
-         
+            Collections.swap(Products.products, i + 1, end);
+
             return (i + 1);
 
         } else if (arr.get(end) instanceof Regions) {
             pivot = ((Regions) arr.get(end)).getColData(col_name);
- 
+
             int i = (start - 1);
             for (int j = start; j <= end - 1; j++) {
                 if ((Regions.regions.get(j).getColData(col_name)).compareTo(pivot) < 0) {
@@ -34,13 +35,13 @@ public class QuickSort {
                     Collections.swap(Regions.regions, i, j);
                 }
             }
-            
-            Collections.swap(Regions.regions, i+1, end);
-         
+
+            Collections.swap(Regions.regions, i + 1, end);
+
             return (i + 1);
         } else if (arr.get(end) instanceof Routes) {
-            pivot = (String) ((Routes) arr.get(end)).getColData(col_name);
- 
+            pivot = ((Routes) arr.get(end)).getColData(col_name);
+
             int i = (start - 1);
             for (int j = start; j <= end - 1; j++) {
                 if ((Routes.routes.get(j).getColData(col_name)).compareTo(pivot) < 0) {
@@ -48,13 +49,13 @@ public class QuickSort {
                     Collections.swap(Routes.routes, i, j);
                 }
             }
-            
-            Collections.swap(Routes.routes, i+1, end);
-         
+
+            Collections.swap(Routes.routes, i + 1, end);
+
             return (i + 1);
         } else if (arr.get(end) instanceof Suppliers) {
-            pivot = (String) ((Suppliers) arr.get(end)).getColData(col_name);
- 
+            pivot = ((Suppliers) arr.get(end)).getColData(col_name);
+
             int i = (start - 1);
             for (int j = start; j <= end - 1; j++) {
                 if ((Suppliers.suppliers.get(j).getColData(col_name)).compareTo(pivot) < 0) {
@@ -62,12 +63,12 @@ public class QuickSort {
                     Collections.swap(Suppliers.suppliers, i, j);
                 }
             }
-            
-            Collections.swap(Suppliers.suppliers, i+1, end);
-         
+
+            Collections.swap(Suppliers.suppliers, i + 1, end);
+
             return (i + 1);
         }
-        
+
         return -1;
 
     }
@@ -80,7 +81,7 @@ public class QuickSort {
             quick(arr, col_name, p + 1, end);
         }
     }
-    
+
     public static void sort(String col_name, String table_name) {
         if (table_name.compareTo("products") == 0) {
             QuickSort.quick(Products.products, col_name, 0, Products.products.size() - 1);
