@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 import static org.cu.adta.group21.provenancedetection.model.Regions.regions;
@@ -15,7 +16,7 @@ public class Suppliers implements Database {
     public int supplier_id;
     public String supplier_name;
     public String ann;
-    public static List<Suppliers> suppliers;
+    public static List<Suppliers> suppliers=new ArrayList<>();
 
     public Suppliers(int supplier_id, String supplier_name, String ann) {
         this.supplier_id = supplier_id;

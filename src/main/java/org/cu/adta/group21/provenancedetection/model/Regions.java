@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 import static org.cu.adta.group21.provenancedetection.model.Products.products;
@@ -15,7 +16,7 @@ public class Regions implements Database {
     public int region_id;
     public String region_name;
     public String ann;
-    public static List<Regions> regions;
+    public static List<Regions> regions=new ArrayList<>();
 
     public Regions(int region_id, String region_name, String ann) {
         this.region_id = region_id;

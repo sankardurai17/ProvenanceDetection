@@ -108,10 +108,8 @@ public class BitmapIndex {
                     bit = bit + "0";
                 }
             }
-
             bitmap.put(distinct_values.get(i), bit);
         }
-
         return bitmap;
 
     }
