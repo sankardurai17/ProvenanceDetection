@@ -10,6 +10,7 @@ import java.sql.SQLException;
 * */
 public class MyDBConnection {
     private static Connection con = null;
+
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -17,20 +18,20 @@ public class MyDBConnection {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if(con!=null){
+            if (con != null) {
                 System.out.println("Connection Established");
             }
         }
         return con;
     }
-    public void close(){
-        if(con!=null){
+
+    public void close() {
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
-            }
-            finally {
+            } finally {
                 System.out.println("Connection Closed");
             }
         }

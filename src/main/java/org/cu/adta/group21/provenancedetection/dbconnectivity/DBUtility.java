@@ -8,18 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DBUtility {
-    public static Map<String,String> executeUserQuery(String query){
+    public static Map<String, String> executeUserQuery(String query) {
         MyDBConnection connection = new MyDBConnection();
-        ResultSet resultSet=null;
-        Map<String, String> resultMap=new HashMap<String,String>();
+        ResultSet resultSet = null;
+        Map<String, String> resultMap = new HashMap<String, String>();
         try {
             Statement st = connection.getConnection().createStatement();
             resultSet = st.executeQuery(query);
             //provenance detection
-            long startTimeForProvenanceComputation=System.currentTimeMillis();
-            resultMap=ProvenanceUtil.computeProvenance(resultSet);
-            long endTimeForProvenanceComputation=System.currentTimeMillis();
-            System.out.println("Provenance Computation method time: "+(endTimeForProvenanceComputation-startTimeForProvenanceComputation)+" time in milli seconds");
+            long startTimeForProvenanceComputation = System.currentTimeMillis();
+            resultMap = ProvenanceUtil.computeProvenance(resultSet);
+            long endTimeForProvenanceComputation = System.currentTimeMillis();
+            System.out.println("Provenance Computation method time: " + (endTimeForProvenanceComputation - startTimeForProvenanceComputation) + " time in milli seconds");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
