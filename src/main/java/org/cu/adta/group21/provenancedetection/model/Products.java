@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 
@@ -14,7 +15,7 @@ public class Products implements Database {
     public int product_id;
     public String product_type;
     public String ann;
-    public static List<Products> products;
+    public static List<Products> products = new ArrayList<>();
 
     public Products(int product_id, String product_type, String ann) {
         this.product_id = product_id;
@@ -39,10 +40,10 @@ public class Products implements Database {
     public static void displayRelation() {
 
         for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i).product_id + " ");
-            System.out.println(products.get(i).product_type + " ");
-            System.out.println(products.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(products.get(i).product_id + " ");
+            System.out.print(products.get(i).product_type + " ");
+            System.out.print(products.get(i).ann + " ");
+            System.out.println();
         }
     }
 

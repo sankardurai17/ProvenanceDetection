@@ -1,13 +1,15 @@
 package org.cu.adta.group21.provenancedetection;
 
-import org.cu.adta.group21.provenancedetection.dbconnectivity.DBUtility;
-import org.cu.adta.group21.provenancedetection.utility.QueryParser;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 import org.cu.adta.group21.provenancedetection.model.Products;
 import org.cu.adta.group21.provenancedetection.model.Regions;
 import org.cu.adta.group21.provenancedetection.model.Routes;
 import org.cu.adta.group21.provenancedetection.model.Suppliers;
+import org.cu.adta.group21.provenancedetection.utility.BitMap;
 
 /*
  * Main class
@@ -16,13 +18,25 @@ import org.cu.adta.group21.provenancedetection.model.Suppliers;
 public class Main {
 
     public static void main(String[] args) {
-        displayWelcomePage();
+        int choice = displayWelcomePage();
         loadRelations();
+        if(choice == 1){
+            //join using sort.
+        }
+        else{
+            //join using bitmap;
+            HashMap<String,BitMap> bitMaps =  new HashMap<>();
+            bitMaps.put("products.product_id",BitMap.bitMapIndex("product_id","products"));
+            bitMaps.put("routes.product",BitMap.bitMapIndex("product","routes"));
+            // "SELECT A2, A3 FROM R, S WHERE R.A2 = S.B2 AND R.A3 = S.B3;"
+            // "SELECT region_name from routes, products  WHERE routes.product = products.product_id;
+            //join(r,s,a2,b2,a3,b3,bitMaps);
+        }
         
-//        Products.displayRelation();
-//        Routes.displayRelation();
-//        Regions.displayRelation();
-//        Suppliers.displayRelation();
+        Products.displayRelation();
+        Routes.displayRelation();
+        Regions.displayRelation();
+        Suppliers.displayRelation();
         
 //        Scanner in = new Scanner(System.in);
 //        String qry = in.nextLine();
@@ -38,8 +52,12 @@ public class Main {
 //        displayResult(resultMap);
     }
 
-    public static void displayWelcomePage() {
-        System.out.println("Hello and Welcome!!" + "Enter the Query that you need to perform: ");
+    public static int displayWelcomePage() {
+        System.out.println("Hello and Welcome!! Press 1.Join using sort 2.Join using bitmap");
+        Scanner sc = new Scanner(System.in);
+        int ip = sc.nextInt();
+        System.out.println("Enter the Query that you need to perform: ");
+        return ip;
     }
 
     public static void displayResult(Map<String, String> resultMap) {
@@ -51,7 +69,5 @@ public class Main {
         Regions.loadData();
         Routes.loadData();
         Suppliers.loadData();
-        
-        
     }
 }

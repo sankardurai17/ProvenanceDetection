@@ -2,6 +2,7 @@ package org.cu.adta.group21.provenancedetection.model;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 import static org.cu.adta.group21.provenancedetection.model.Regions.regions;
@@ -18,7 +19,7 @@ public class Routes implements Database {
     public int supplier;
     public int product;
     public String ann;
-    public static List<Routes> routes;
+    public static List<Routes> routes = new ArrayList<>();
 
     public Routes(int route_id, int region_from, int region_to, int supplier, int product, String ann) {
         this.route_id = route_id;
@@ -50,13 +51,13 @@ public class Routes implements Database {
 
     public static void displayRelation() {
         for (int i = 0; i < routes.size(); i++) {
-            System.out.println(routes.get(i).route_id + " ");
-            System.out.println(routes.get(i).region_from + " ");
-            System.out.println(routes.get(i).region_to + " ");
-            System.out.println(routes.get(i).supplier + " ");
-            System.out.println(routes.get(i).product + " ");
-            System.out.println(routes.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(routes.get(i).route_id + " ");
+            System.out.print(routes.get(i).region_from + " ");
+            System.out.print(routes.get(i).region_to + " ");
+            System.out.print(routes.get(i).supplier + " ");
+            System.out.print(routes.get(i).product + " ");
+            System.out.print(routes.get(i).ann + " ");
+            System.out.println();
         }
     }
 
