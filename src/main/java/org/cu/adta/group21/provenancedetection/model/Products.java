@@ -15,7 +15,7 @@ public class Products implements Database {
     public int product_id;
     public String product_type;
     public String ann;
-    public static List<Products> products = new ArrayList<>();
+    public static List<Products> products=new ArrayList<>();
 
     public Products(int product_id, String product_type, String ann) {
         this.product_id = product_id;
@@ -59,7 +59,7 @@ public class Products implements Database {
         return -1;
     }
 
-    public static void loadData() {
+    public static List<Products> loadData() {
         String query = "select * from products;";
         MyDBConnection connection = new MyDBConnection();
         ResultSet resultSet = null;
@@ -76,5 +76,6 @@ public class Products implements Database {
 
         }
 
+        return Products.products;
     }
 }

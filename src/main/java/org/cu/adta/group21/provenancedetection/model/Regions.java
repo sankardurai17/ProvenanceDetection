@@ -16,7 +16,7 @@ public class Regions implements Database {
     public int region_id;
     public String region_name;
     public String ann;
-    public static List<Regions> regions =  new ArrayList<>();
+    public static List<Regions> regions=new ArrayList<>();
 
     public Regions(int region_id, String region_name, String ann) {
         this.region_id = region_id;

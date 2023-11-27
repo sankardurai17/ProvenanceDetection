@@ -19,7 +19,7 @@ public class Routes implements Database {
     public int supplier;
     public int product;
     public String ann;
-    public static List<Routes> routes = new ArrayList<>();
+    public static List<Routes> routes=new ArrayList<>();
 
     public Routes(int route_id, int region_from, int region_to, int supplier, int product, String ann) {
         this.route_id = route_id;
