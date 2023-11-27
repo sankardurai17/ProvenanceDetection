@@ -35,7 +35,7 @@ public class BitMapJoin {
         for(String attr : b1.attributeValMap.keySet()){
             if(b2.attributeValMap.containsKey(attr)){
                 ArrayList<Boolean> resultJoin = BitMapJoin.andOperation(b1.bitVector.get(b1.attributeValMap.get(attr)), b2.bitVector.get(b2.attributeValMap.get(attr)));
-                finalResult = OrOperation(finalResult,resultJoin);
+                //finalResult = OrOperation(finalResult,resultJoin);
             }
         }
 
