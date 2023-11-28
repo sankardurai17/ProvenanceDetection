@@ -8,6 +8,7 @@ import java.util.*;
 
 public class BitMapJoin {
 
+    //for where conditions:
     public static ArrayList<Boolean> andOperation(ArrayList<Boolean> arr1, ArrayList<Boolean> arr2){
         int size = arr1.size()>arr2.size() ? arr2.size() : arr1.size();
         ArrayList<Boolean> res = new ArrayList<>();
@@ -54,7 +55,6 @@ public class BitMapJoin {
         //using bitmap index to check first join attribute:
         for(String attr : ra2.attributeValMap.keySet()){
             if(sb2.attributeValMap.containsKey(attr)) {
-                 //For these tuples check: condition verify  -> r.a3 == s.b33.
                  ArrayList<Boolean> rtuples = ra2.bitVector.get(ra2.attributeValMap.get(attr));
                  ArrayList<Boolean> stuples = sb2.bitVector.get(sb2.attributeValMap.get(attr));
 
@@ -63,7 +63,6 @@ public class BitMapJoin {
                          for(int j=0;j<stuples.size();j++){
                              if(stuples.get(j).equals(Boolean.TRUE)){
                                  //check second condition of join.
-                                 //decompression>relation size.??
                                  if(i>R.r_relation.size() || j>S.s_relation.size()){
                                      System.out.println("Error!!");
                                      continue;
