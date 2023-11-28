@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
 
-public class R implements Database{
+public class R implements Database,Comparable<R>{
     public int a1;
     public int a2;
     public int a3;
@@ -66,5 +66,27 @@ public class R implements Database{
 
         }
 
+    }
+
+    @Override
+    public int compareTo(R o) {
+        if(this.a2!=o.a2){
+            return Integer.compare(this.a2,o.a2);
+        }
+        else{
+            return Integer.compare(this.a3,o.a3);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "R{" +
+                "a1=" + a1 +
+                ", a2=" + a2 +
+                ", a3=" + a3 +
+                ", a4=" + a4 +
+                ", ann='" + ann + '\'' +
+                ", i=" + i +
+                '}';
     }
 }
