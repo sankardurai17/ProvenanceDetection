@@ -51,13 +51,13 @@ public class Routes implements Database {
 
     public static void displayRelation() {
         for (int i = 0; i < routes.size(); i++) {
-            System.out.println(routes.get(i).route_id + " ");
-            System.out.println(routes.get(i).region_from + " ");
-            System.out.println(routes.get(i).region_to + " ");
-            System.out.println(routes.get(i).supplier + " ");
-            System.out.println(routes.get(i).product + " ");
-            System.out.println(routes.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(routes.get(i).route_id + " ");
+            System.out.print(routes.get(i).region_from + " ");
+            System.out.print(routes.get(i).region_to + " ");
+            System.out.print(routes.get(i).supplier + " ");
+            System.out.print(routes.get(i).product + " ");
+            System.out.print(routes.get(i).ann + " ");
+            System.out.println();
         }
     }
 

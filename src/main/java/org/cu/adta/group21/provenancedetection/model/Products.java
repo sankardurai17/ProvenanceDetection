@@ -40,10 +40,10 @@ public class Products implements Database {
     public static void displayRelation() {
 
         for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i).product_id + " ");
-            System.out.println(products.get(i).product_type + " ");
-            System.out.println(products.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(products.get(i).product_id + " ");
+            System.out.print(products.get(i).product_type + " ");
+            System.out.print(products.get(i).ann + " ");
+            System.out.println();
         }
     }
 

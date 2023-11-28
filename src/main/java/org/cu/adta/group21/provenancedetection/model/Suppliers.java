@@ -39,10 +39,10 @@ public class Suppliers implements Database {
 
     public static void displayRelation() {
         for (int i = 0; i < suppliers.size(); i++) {
-            System.out.println(suppliers.get(i).supplier_id + " ");
-            System.out.println(suppliers.get(i).supplier_name + " ");
-            System.out.println(suppliers.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(suppliers.get(i).supplier_id + " ");
+            System.out.print(suppliers.get(i).supplier_name + " ");
+            System.out.print(suppliers.get(i).ann + " ");
+            System.out.println();
         }
     }
 
