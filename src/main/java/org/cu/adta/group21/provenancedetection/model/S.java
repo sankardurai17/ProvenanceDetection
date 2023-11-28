@@ -11,7 +11,7 @@ import static org.cu.adta.group21.provenancedetection.model.Routes.routes;
  *
  * @author USER
  */
-public class S implements Database{
+public class S implements Database,Comparable<S>{
 
     public int b1;
     public int b2;
@@ -73,5 +73,26 @@ public class S implements Database{
         }
 
     }
-    
+
+    @Override
+    public String toString() {
+        return "S{" +
+                "b1=" + b1 +
+                ", b2=" + b2 +
+                ", b3=" + b3 +
+                ", b4=" + b4 +
+                ", ann='" + ann + '\'' +
+                ", i=" + i +
+                '}';
+    }
+
+    @Override
+    public int compareTo(S o) {
+        if(this.b2!=o.b2){
+            return Integer.compare(this.b2,o.b2);
+        }
+        else{
+            return Integer.compare(this.b3,o.b3);
+        }
+    }
 }
