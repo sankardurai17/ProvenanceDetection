@@ -1,7 +1,13 @@
 package org.cu.adta.group21.provenancedetection;
+import java.util.Map;
+import java.util.Scanner;
 
+import org.cu.adta.group21.provenancedetection.model.R;
 import org.cu.adta.group21.provenancedetection.model.Routes;
+import org.cu.adta.group21.provenancedetection.model.S;
 import org.cu.adta.group21.provenancedetection.model.Suppliers;
+import org.cu.adta.group21.provenancedetection.utility.BitMap;
+import org.cu.adta.group21.provenancedetection.utility.BitMapJoin;
 import org.cu.adta.group21.provenancedetection.utility.QueryParser;
 import org.cu.adta.group21.provenancedetection.utility.Util;
 
@@ -14,76 +20,71 @@ import java.util.concurrent.atomic.AtomicInteger;
  * */
 public class Main {
     public static void main(String[] args) {
-        displayWelcomePage();
-        Scanner in = new Scanner(System.in);
-        String qry = in.nextLine();
+        int choice = displayWelcomePage();
+        loadRelations();
+        if(choice == 1){
+            //join using sort.
+        }
+        else{
+            //join using bitmap;
+            //Query :: "SELECT A2, A3 FROM R, S WHERE R.A2 = S.B2 AND R.A3 = S.B3;"
+            //generate compressed bitmaps on Join attributes:: r.a2, s.b2, r.a3, s.b3:
+
+            BitMap ra2x = BitMap.bitMapIndex("a2", "r").compressBitMap();
+            BitMap sb2x = BitMap.bitMapIndex("b2","s").compressBitMap();
+            BitMap ra3x = BitMap.bitMapIndex("a3", "r").compressBitMap();
+            BitMap sb3x = BitMap.bitMapIndex("b3","s").compressBitMap();
+
+            //perform join:
+           BitMapJoin.joinUsingBitmap(ra2x,sb2x,ra3x,sb3x);
+        }
+
+//        long startTimeForParseQuery=System.currentTimeMillis();
+//        String updatedQuery = QueryParser.parseQuery(qry);
+//        long endTimeForParseQuery=System.currentTimeMillis();
+//        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" milli seconds");
+//        System.out.println(updatedQuery);
+//        long startTimeForExecuteQuery=System.currentTimeMillis();
+//        Map<String, String> resultMap = DBUtility.executeUserQuery(updatedQuery);
+//        long endTimeForExecuteQuery=System.currentTimeMillis();
+//        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" milli seconds");
+//        displayResult(resultMap);
+    }
+
+    public static int displayWelcomePage() {
+        System.out.println("Hello and Welcome!! Press 1.Join using sort 2.Join using bitmap");
+        Scanner sc = new Scanner(System.in);
+        int ip = sc.nextInt();
+        return ip;
+    }
+    
+    private static void loadRelations(){
+        //System.out.println("Enter the Query that you need to perform: ");
+        //Scanner in = new Scanner(System.in);
+        //String qry = in.nextLine();
+        String qry = "select a2, a3 from r, s where r.a2 = s.b2 AND r.a3 = s.b3";
         //long startTimeForParseQuery=System.currentTimeMillis();
 
         List<String> columnNames=QueryParser.getSelectColumns(qry);
         List<String> tableNames=QueryParser.getJoinRelations(qry);
 
-        //List<Products> products=Products.loadData();
-        Suppliers.loadData();
-        List<Suppliers> suppliers=Suppliers.suppliers;
-        suppliers.stream().forEach(suppliers1 -> System.out.println(suppliers1.supplier_id));
-        System.out.println(suppliers);
-        Routes.loadData();
-        List<Routes> routes=Routes.routes;
-        routes.stream().forEach(routes1 -> System.out.println(routes1.supplier));
-        System.out.println(routes);
-        //Regions.loadData();
-        //List<Regions> regions=Regions.regions;
-        Map<String,String> joinProvenance=Util.performJoin(suppliers,routes,"supplier_id","supplier",columnNames);
-        displayResult(joinProvenance);
-        System.out.println();
+        R.loadData();
+        S.loadData();
 
-
-        /*String tableName1="org.cu.adta.group21.provenancedetection.model."+tableNames.get(0).substring(0,1).toUpperCase()+tableNames.get(0).substring(1).toLowerCase();
-        String tableName2="org.cu.adta.group21.provenancedetection.model."+tableNames.get(1).substring(0,1).toUpperCase()+tableNames.get(1).substring(1).toLowerCase();
-       */
-        /*try {
-            Object instance1=instantiateClass(tableName1);
-            if(instance1 instanceof Suppliers){
-                System.out.println("Suppliers");
-            }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }*/
-
-
-
-
-
-
-
-
-        //if(tableNames.get(0).equals("Suppliers")||)
-        //GenericListHandler<?,?> obj= new GenericListHandler<?,?>(list1,list2,columnNames.get(0),columnNames.get(1));
-        //if(tableNames.get(0).equals())
-
-
-
-       /* String updatedQuery = QueryParser.parseQuery(qry);
-        String queries[]=updatedQuery.split(",");
-        System.out.println(updatedQuery);
-        System.exit(0);
-        long endTimeForParseQuery=System.currentTimeMillis();
-        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" milli seconds");
-        System.out.println(updatedQuery);
-        long startTimeForExecuteQuery=System.currentTimeMillis();
-        Map<String, String> resultMap = DBUtility.executeUserQuery(updatedQuery);
-        long endTimeForExecuteQuery=System.currentTimeMillis();
-        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" milli seconds");
-        displayResult(resultMap);*/
-    }
-
-
-    public static void displayWelcomePage() {
-        System.out.println("Hello and Welcome!!" + "Enter the Query that you need to perform: ");
+//        List<Products> products=Products.loadData();
+//        Suppliers.loadData();
+//        List<Suppliers> suppliers=Suppliers.suppliers;
+//        suppliers.stream().forEach(suppliers1 -> System.out.println(suppliers1.supplier_id));
+//        System.out.println(suppliers);
+//        Routes.loadData();
+//        List<Routes> routes=Routes.routes;
+//        routes.stream().forEach(routes1 -> System.out.println(routes1.supplier));
+//        System.out.println(routes);
+//        //Regions.loadData();
+//        //List<Regions> regions=Regions.regions;
+//        Map<String,String> joinProvenance=Util.performJoin(suppliers,routes,"supplier_id","supplier",columnNames);
+//        displayResult(joinProvenance);
+//        System.out.println();
     }
 
     public static void displayResult(Map<String, String> resultMap) {

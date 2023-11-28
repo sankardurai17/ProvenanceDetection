@@ -40,10 +40,10 @@ public class Regions implements Database {
 
     public static void displayRelation() {
         for (int i = 0; i < regions.size(); i++) {
-            System.out.println(regions.get(i).region_id + " ");
-            System.out.println(regions.get(i).region_name + " ");
-            System.out.println(regions.get(i).ann + " ");
-            System.out.println("");
+            System.out.print(regions.get(i).region_id + " ");
+            System.out.print(regions.get(i).region_name + " ");
+            System.out.print(regions.get(i).ann + " ");
+            System.out.println();
         }
     }
 
