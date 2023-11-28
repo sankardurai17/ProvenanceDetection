@@ -157,7 +157,7 @@ public class BitMap {
 
     public BitMap decompressBitMap(){
         for(int i=0;i<bitVector.size();i++){
-            bitVector.set(i,runLengthEncoding(bitVector.get(i)));
+            bitVector.set(i,runLengthDecoding(bitVector.get(i)));
         }
         return this;
     }
@@ -172,10 +172,10 @@ public class BitMap {
             str = str +  " for value: " + attr + "\n";
             for(Boolean b: bitVector.get(attributeValMap.get(attr))){
                 if(b==false){
-                    str = str + cnt + "->0 ";
+                    str = str  + "0";//+ cnt + "->0 ";
                 }
                 else {
-                    str = str + cnt + "->1 ";
+                    str = str + "1";//+ cnt + "->1 ";
                 }
                 cnt++;
             }

@@ -30,17 +30,13 @@ public class Main {
             //Query :: "SELECT A2, A3 FROM R, S WHERE R.A2 = S.B2 AND R.A3 = S.B3;"
             //generate compressed bitmaps on Join attributes:: r.a2, s.b2, r.a3, s.b3:
 
-            BitMap ra2 = BitMap.bitMapIndex("a2", "r");
-            BitMap sb2 = BitMap.bitMapIndex("b2","s");
-            BitMap ra3 = BitMap.bitMapIndex("a3", "r");
-            BitMap sb3 = BitMap.bitMapIndex("b3","s");
-//            BitMap ra2 = BitMap.bitMapIndex("a2", "r").compressBitMap();
-//            BitMap sb2 = BitMap.bitMapIndex("b2","s").compressBitMap();
-//            BitMap ra3 = BitMap.bitMapIndex("a3", "r").compressBitMap();
-//            BitMap sb3 = BitMap.bitMapIndex("b3","s").compressBitMap();
+            BitMap ra2x = BitMap.bitMapIndex("a2", "r").compressBitMap();
+            BitMap sb2x = BitMap.bitMapIndex("b2","s").compressBitMap();
+            BitMap ra3x = BitMap.bitMapIndex("a3", "r").compressBitMap();
+            BitMap sb3x = BitMap.bitMapIndex("b3","s").compressBitMap();
 
             //perform join:
-            BitMapJoin.joinUsingBitmap(ra2,sb2,ra3,sb3);
+           BitMapJoin.joinUsingBitmap(ra2x,sb2x,ra3x,sb3x);
         }
 
 //        long startTimeForParseQuery=System.currentTimeMillis();
