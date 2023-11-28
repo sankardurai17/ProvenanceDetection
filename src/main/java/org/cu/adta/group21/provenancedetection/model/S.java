@@ -48,7 +48,11 @@ public class S implements Database{
 
         return null;
     }
-    
+
+    public String getRowData(){
+        return Integer.toString(this.b1) + Integer.toString(this.b2) + Integer.toString(this.b3) + Integer.toString(this.b4) + Integer.toString(this.i);
+    }
+
     public static void loadData() {
         String query = "select * from s;";
         MyDBConnection connection = new MyDBConnection();

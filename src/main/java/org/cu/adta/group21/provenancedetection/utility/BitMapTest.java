@@ -10,8 +10,8 @@ public class BitMapTest {
 
     @Test
     public void runLengthEncoding() {
-        String str = "0000000000000101";
-        //String str = "00010010000000100000";
+        //String str = "0000000000000101";
+        String str = "00010010000000100000";
         ArrayList<Boolean> arr =new ArrayList<>();
         for(int i=0;i<str.length();i++){
             if(str.charAt(i) == '0')arr.add(false);
@@ -23,8 +23,8 @@ public class BitMapTest {
             if(b==false)resstr = resstr + "0";
             else resstr = resstr + "1";
         }
-        assertEquals(resstr, "1110110101");
-        //assertEquals("10111010110111", resstr);
+        //assertEquals(resstr, "1110110101");
+        assertEquals("10111010110111", resstr);
     }
 
     @Test

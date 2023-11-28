@@ -1,5 +1,7 @@
 package org.cu.adta.group21.provenancedetection.utility;
 import org.cu.adta.group21.provenancedetection.model.Products;
+import org.cu.adta.group21.provenancedetection.model.R;
+import org.cu.adta.group21.provenancedetection.model.S;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +38,8 @@ public class BitMap {
         }
         ArrayList<Boolean> compressed = new ArrayList<>();
         for (int i = 0; i < runs.size(); i++) {
-            int bit_count = (int) (1 + Math.floor(Math.log(runs.get(i)) / Math.log(2)));
+            int bit_count = Integer.toBinaryString(runs.get(i)).length();
+            //int bit_count = (int) (1 + Math.floor(Math.log(runs.get(i)) / Math.log(2)));
             for (int j = 0; j < bit_count - 1; j++) {
                 compressed.add(true);
             }
@@ -83,7 +86,47 @@ public class BitMap {
 
     public static BitMap bitMapIndex(String col_name, String table_name) {
         BitMap bitMap = new BitMap();
-        if (table_name.equals("products")) {
+        if (table_name.equalsIgnoreCase("S")) {
+            int tableSize = S.s_relation.size();
+            for (int i = 0; i < tableSize; i++) {
+                String data = S.s_relation.get(i).getColData(col_name);
+                if(bitMap.attributeValMap.containsKey(data)){
+                    int rowIndex = bitMap.attributeValMap.get(data);
+                    bitMap.bitVector.get(rowIndex).set(i,true);
+                }
+                else{
+                    ArrayList<Boolean> newMap = new ArrayList<Boolean>(tableSize);
+                    newMap.addAll(Collections.nCopies(tableSize, Boolean.FALSE));
+                    int rows = bitMap.bitVector.size();
+                    bitMap.attributeValMap.put(data,rows);
+                    bitMap.bitVector.add(newMap);
+                    bitMap.bitVector.get(rows).set(i,true);
+                }
+            }
+
+        }
+
+        if (table_name.equalsIgnoreCase("R")) {
+            int tableSize = R.r_relation.size();
+            for (int i = 0; i < tableSize; i++) {
+                String data = R.r_relation.get(i).getColData(col_name);
+                if(bitMap.attributeValMap.containsKey(data)){
+                    int rowIndex = bitMap.attributeValMap.get(data);
+                    bitMap.bitVector.get(rowIndex).set(i,true);
+                }
+                else{
+                    ArrayList<Boolean> newMap = new ArrayList<Boolean>(tableSize);
+                    newMap.addAll(Collections.nCopies(tableSize, Boolean.FALSE));
+                    int rows = bitMap.bitVector.size();
+                    bitMap.attributeValMap.put(data,rows);
+                    bitMap.bitVector.add(newMap);
+                    bitMap.bitVector.get(rows).set(i,true);
+                }
+            }
+
+        }
+
+        /*if (table_name.equals("products")) {
             int tableSize = Products.products.size();
             for (int i = 0; i < tableSize; i++) {
                 String data = Products.products.get(i).getColData(col_name);
@@ -101,8 +144,22 @@ public class BitMap {
                 }
             }
 
-        }
+        }*/
         return bitMap;
+    }
+
+    public BitMap compressBitMap() {
+        for(int i=0;i<bitVector.size();i++){
+            bitVector.set(i,runLengthEncoding(bitVector.get(i)));
+        }
+        return this;
+    }
+
+    public BitMap decompressBitMap(){
+        for(int i=0;i<bitVector.size();i++){
+            bitVector.set(i,runLengthEncoding(bitVector.get(i)));
+        }
+        return this;
     }
 
     @Override
