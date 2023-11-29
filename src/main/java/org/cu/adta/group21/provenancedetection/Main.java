@@ -4,9 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import org.cu.adta.group21.provenancedetection.model.R;
-import org.cu.adta.group21.provenancedetection.model.Routes;
 import org.cu.adta.group21.provenancedetection.model.S;
-import org.cu.adta.group21.provenancedetection.model.Suppliers;
 import org.cu.adta.group21.provenancedetection.utility.*;
 
 import java.util.*;
@@ -22,11 +20,13 @@ public class Main {
         loadRelations();
         if (choice == 1) {
             long timeForSort = System.currentTimeMillis();
+            //Collections.sort, comparator was overridden based
             Collections.sort(R.r_relation);
             Collections.sort(S.s_relation);
             long timeForEnd = System.currentTimeMillis();
             System.out.println("Time taken to sort two lists is: " + (timeForEnd - timeForSort) + " in milli seconds");
             long startTimeForJoinAndProv = System.currentTimeMillis();
+            //This method does the join and provenance calculation part
             SortMergeJoin.joinSortedLists();
             long endTimeForJoinAndProv = System.currentTimeMillis();
             System.out.println("Time taken to join and detect provenance on two lists is: " + (endTimeForJoinAndProv - startTimeForJoinAndProv) + " in milli seconds");
@@ -40,7 +40,7 @@ public class Main {
             BitMap sb2x = BitMap.bitMapIndex("b2", "s").compressBitMap();
             BitMap ra3x = BitMap.bitMapIndex("a3", "r").compressBitMap();
             BitMap sb3x = BitMap.bitMapIndex("b3", "s").compressBitMap();
-            long endTimeForBitmapCreation  = System.currentTimeMillis();
+            long endTimeForBitmapCreation = System.currentTimeMillis();
             System.out.println("Time taken to create bit map indexes is: " + (endTimeForBitmapCreation - startTimeForBitmapCreation) + " in milli seconds");
 
             //perform join:
