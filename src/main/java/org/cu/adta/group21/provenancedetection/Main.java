@@ -35,10 +35,13 @@ public class Main {
             //Query :: "SELECT A2, A3 FROM R, S WHERE R.A2 = S.B2 AND R.A3 = S.B3;"
             //generate compressed bitmaps on Join attributes:: r.a2, s.b2, r.a3, s.b3:
 
+            long startTimeForBitmapCreation = System.currentTimeMillis();
             BitMap ra2x = BitMap.bitMapIndex("a2", "r").compressBitMap();
             BitMap sb2x = BitMap.bitMapIndex("b2", "s").compressBitMap();
             BitMap ra3x = BitMap.bitMapIndex("a3", "r").compressBitMap();
             BitMap sb3x = BitMap.bitMapIndex("b3", "s").compressBitMap();
+            long endTimeForBitmapCreation  = System.currentTimeMillis();
+            System.out.println("Time taken to create bit map indexes is: " + (endTimeForBitmapCreation - startTimeForBitmapCreation) + " in milli seconds");
 
             //perform join:
             long startTimeForJoinBitMaps = System.currentTimeMillis();
@@ -47,17 +50,6 @@ public class Main {
             System.out.println("Time taken to join bit map indexes is: " + (endTimeForJoinBitMaps - startTimeForJoinBitMaps) + " in milli seconds");
 
         }
-
-//        long startTimeForParseQuery=System.currentTimeMillis();
-//        String updatedQuery = QueryParser.parseQuery(qry);
-//        long endTimeForParseQuery=System.currentTimeMillis();
-//        System.out.println("Parse Query method time taken: "+(endTimeForParseQuery-startTimeForParseQuery)+" milli seconds");
-//        System.out.println(updatedQuery);
-//        long startTimeForExecuteQuery=System.currentTimeMillis();
-//        Map<String, String> resultMap = DBUtility.executeUserQuery(updatedQuery);
-//        long endTimeForExecuteQuery=System.currentTimeMillis();
-//        System.out.println("Execute Query and Provenance Detection method time taken: "+(endTimeForExecuteQuery-startTimeForExecuteQuery)+" milli seconds");
-//        displayResult(resultMap);
     }
 
     public static int displayWelcomePage() {
@@ -68,15 +60,7 @@ public class Main {
     }
 
     private static void loadRelations() {
-        //System.out.println("Enter the Query that you need to perform: ");
-        //Scanner in = new Scanner(System.in);
-        //String qry = in.nextLine();
         String qry = "select a2, a3 from r, s where r.a2 = s.b2 AND r.a3 = s.b3";
-        //long startTimeForParseQuery=54785897System.currentTimeMillis();
-
-        List<String> columnNames = QueryParser.getSelectColumns(qry);
-        List<String> tableNames = QueryParser.getJoinRelations(qry);
-
         R.loadData();
         S.loadData();
     }
