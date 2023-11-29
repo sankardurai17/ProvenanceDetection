@@ -2,7 +2,6 @@ package org.cu.adta.group21.provenancedetection.utility;
 
 import org.cu.adta.group21.provenancedetection.Main;
 import org.cu.adta.group21.provenancedetection.model.R;
-import org.cu.adta.group21.provenancedetection.model.Result;
 import org.cu.adta.group21.provenancedetection.model.S;
 
 import java.util.*;
