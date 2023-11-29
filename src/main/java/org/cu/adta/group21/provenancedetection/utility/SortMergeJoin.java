@@ -12,7 +12,6 @@ public class SortMergeJoin {
         List<R> rList = R.r_relation;
         List<S> sList = S.s_relation;
         Map<String, String> map = new LinkedHashMap<>();
-        //map.put("S.NO A2 A3 ","R_Ann.S_Ann");
         boolean flag=false;
         for (int i = 0; i < rList.size(); i++) {
             R r = rList.get(i);

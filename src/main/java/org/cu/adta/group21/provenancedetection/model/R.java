@@ -43,10 +43,6 @@ public class R implements Database,Comparable<R>{
         return null;
     }
 
-    public String getRowData(){
-        return Integer.toString(this.a1) + Integer.toString(this.a2) + Integer.toString(this.a3) + Integer.toString(this.a4) + Integer.toString(this.i);
-    }
-
     public static void loadData() {
         String query = "select * from r;";
         MyDBConnection connection = new MyDBConnection();

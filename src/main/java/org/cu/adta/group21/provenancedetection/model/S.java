@@ -5,7 +5,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.cu.adta.group21.provenancedetection.dbconnectivity.MyDBConnection;
-import static org.cu.adta.group21.provenancedetection.model.Routes.routes;
 
 /**
  *
@@ -47,10 +46,6 @@ public class S implements Database,Comparable<S>{
         }
 
         return null;
-    }
-
-    public String getRowData(){
-        return Integer.toString(this.b1) + Integer.toString(this.b2) + Integer.toString(this.b3) + Integer.toString(this.b4) + Integer.toString(this.i);
     }
 
     public static void loadData() {

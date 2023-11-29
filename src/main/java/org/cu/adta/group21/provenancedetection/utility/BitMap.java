@@ -1,5 +1,4 @@
 package org.cu.adta.group21.provenancedetection.utility;
-import org.cu.adta.group21.provenancedetection.model.Products;
 import org.cu.adta.group21.provenancedetection.model.R;
 import org.cu.adta.group21.provenancedetection.model.S;
 
@@ -125,26 +124,6 @@ public class BitMap {
             }
 
         }
-
-        /*if (table_name.equals("products")) {
-            int tableSize = Products.products.size();
-            for (int i = 0; i < tableSize; i++) {
-                String data = Products.products.get(i).getColData(col_name);
-                if(bitMap.attributeValMap.containsKey(data)){
-                    int rowIndex = bitMap.attributeValMap.get(data);
-                    bitMap.bitVector.get(rowIndex).set(i,true);
-                }
-                else{
-                    ArrayList<Boolean> newMap = new ArrayList<Boolean>(tableSize);
-                    newMap.addAll(Collections.nCopies(tableSize, Boolean.FALSE));
-                    int rows = bitMap.bitVector.size();
-                    bitMap.attributeValMap.put(data,rows);
-                    bitMap.bitVector.add(newMap);
-                    bitMap.bitVector.get(rows).set(i,true);
-                }
-            }
-
-        }*/
         return bitMap;
     }
 
